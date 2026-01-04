@@ -23,6 +23,7 @@ const Register = () => {
     try {
       await api.post("/auth/register", { name, email, password });
       navigate("/login");
+      alert("Account Created Successfully");
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     }
@@ -50,7 +51,6 @@ const Register = () => {
           required
         />
 
-        {/* Email */}
         <input
           type="email"
           placeholder="Email"
@@ -60,12 +60,12 @@ const Register = () => {
           required
         />
 
-        {/* Password with eye toggle */}
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
+            minLength={6}
             onChange={(e) => setPassword(e.target.value)}
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black w-full pr-10"
             required
@@ -79,7 +79,6 @@ const Register = () => {
           </button>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="p-3 border border-red-500 bg-red-50 text-red-600 rounded text-center">
             {error}
