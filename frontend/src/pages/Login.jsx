@@ -7,22 +7,28 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
     setError("");
+
     if (!form.email || !form.password) {
       setError("Please fill in all fields");
       return;
     }
 
     try {
+      setLoading(true);
       const res = await api.post("/auth/login", form);
       localStorage.setItem("token", res.data.token);
       navigate("/courses");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -36,7 +42,8 @@ const Login = () => {
           Course Manager
         </h2>
 
-        <h3 className="text-xl font-bold text-black border-l-3 pl-2">Login</h3>
+        <h3 className="text-xl font-bold text-black border-l-4 pl-2">Login</h3>
+
         <input
           type="email"
           placeholder="Email"
@@ -58,7 +65,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -72,9 +79,22 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-black text-white p-3 rounded hover:bg-gray-800 transition"
+          disabled={loading}
+          className={`p-3 rounded w-full text-white transition
+            ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-black hover:bg-gray-800"
+            }`}
         >
-          Login
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              Logging in...
+            </span>
+          ) : (
+            "Login"
+          )}
         </button>
 
         <div className="text-center text-sm text-gray-700 mt-2">
