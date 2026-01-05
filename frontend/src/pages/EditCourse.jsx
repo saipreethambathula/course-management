@@ -62,7 +62,7 @@ const EditCourse = () => {
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
+            className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition cursor-pointer"
           >
             Update Course
           </button>

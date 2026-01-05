@@ -44,13 +44,13 @@ const Courses = () => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => navigate(`/courses/edit/${c.id}`)}
-                    className="bg-black text-white px-3 py-1 rounded hover:bg-gray-800 transition"
+                    className="bg-black text-white px-3 py-1 rounded hover:bg-gray-800 transition cursor-pointer"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => deleteCourse(c.id)}
-                    className="bg-black text-white px-3 py-1 rounded hover:bg-gray-800 transition"
+                    className="bg-black text-white px-3 py-1 rounded hover:bg-gray-800 transition cursor-pointer"
                   >
                     Delete
                   </button>
