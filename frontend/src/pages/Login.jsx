@@ -58,7 +58,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -72,7 +72,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="bg-black text-white p-3 rounded hover:bg-gray-800 transition cursor-pointer"
+          className="bg-black text-white p-3 rounded hover:bg-gray-800 transition"
         >
           Login
         </button>

@@ -9,7 +9,6 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [inputFields, setInputFields] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,7 +21,6 @@ const Register = () => {
     }
 
     try {
-      setInputFields(true);
       await api.post("/auth/register", { name, email, password });
       navigate("/login");
       alert("Account Created Successfully");
@@ -48,7 +46,6 @@ const Register = () => {
           type="text"
           placeholder="Name"
           value={name}
-          disabled={inputFields}
           onChange={(e) => setName(e.target.value)}
           className="p-3 border border-gray-300 rounded  focus:outline-none focus:ring-2 focus:ring-black"
           required
@@ -57,7 +54,6 @@ const Register = () => {
         <input
           type="email"
           placeholder="Email"
-          disabled={inputFields}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="p-3 border border-gray-300 rounded  focus:outline-none focus:ring-2 focus:ring-black"
@@ -69,7 +65,6 @@ const Register = () => {
             type={showPassword ? "text" : "password"}
             placeholder="Password"
             value={password}
-            disabled={inputFields}
             minLength={6}
             onChange={(e) => setPassword(e.target.value)}
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black w-full pr-10"
@@ -78,7 +73,7 @@ const Register = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -92,7 +87,7 @@ const Register = () => {
 
         <button
           type="submit"
-          className="bg-black text-white p-3 rounded hover:bg-gray-800 transition w-full cursor-pointer"
+          className="bg-black text-white p-3 rounded hover:bg-gray-800 transition w-full"
         >
           Register
         </button>
